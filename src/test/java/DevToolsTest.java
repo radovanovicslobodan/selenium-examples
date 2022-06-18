@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v85.emulation.Emulation;
 import org.openqa.selenium.devtools.v97.network.Network;
 import org.openqa.selenium.devtools.v97.network.model.ConnectionType;
 import org.openqa.selenium.devtools.v97.security.Security;
@@ -41,6 +40,18 @@ public class DevToolsTest {
         long endTime = System.currentTimeMillis();
 
         System.out.println("Load time is " + (endTime - startTime));
+    }
+
+    @Test
+    public void emulateDisconnectedNetworkTest() {
+        chromeDevTools.send(Network.emulateNetworkConditions(
+                true,
+                0,
+                0,
+                0,
+                Optional.empty()
+        ));
+        driver.navigate().to("https://www.swtestacademy.com");
     }
 
     @Test
